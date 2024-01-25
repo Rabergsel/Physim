@@ -8,6 +8,11 @@ namespace Physim
 {
     public class Force
     {
+        public Force(Vector3D orientation, float initalForce)
+        {
+            Orientation = orientation;
+            Newton = initalForce;
+        }
         public string Name { get; set; } = "Force";
 
         public virtual Vector3D GetNewton(Simulation.SimulationUpdateStepInfo info, PhysicsObject obj)

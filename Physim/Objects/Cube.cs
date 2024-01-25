@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Physim.Objects
 {
-    internal class Cube : PhysicsObject
+    public class Cube : PhysicsObject
     {
 
         public float Size = 0;
