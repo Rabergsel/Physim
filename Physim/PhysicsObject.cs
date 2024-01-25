@@ -8,6 +8,10 @@
 
         public Vector3D ResultForce { get; set; } = new Vector3D(0, 0, 0);
 
+        public virtual Vector3D getProjectedArea()
+        {
+            return new Vector3D(0, 0, 0);
+        }
 
         //Dynamic Attributes
         public Vector3D PositionVector { get; set; } = new Vector3D(0, 0, 0);
@@ -16,16 +20,16 @@
 
         public Vector3D AccelerationVector { get { return ResultForce / Mass; } set { } }
 
-        public void UpdateForce(Simulation.SimulationUpdateStepInfo info)
+        public void Update(Simulation.SimulationUpdateStepInfo info)
         {
             ResultForce = new Vector3D(0, 0, 0);
             foreach(var force in Forces)
             {
-                ResultForce += force.GetNewton();
+                ResultForce += force.GetNewton(info, this);
             }
 
             VelocityVector += AccelerationVector * info.DeltaT;
-
+            PositionVector += VelocityVector * info.DeltaT;
         }
 
         

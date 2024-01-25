@@ -10,7 +10,7 @@ namespace Physim
     {
         public string Name { get; set; } = "Force";
 
-        public virtual Vector3D GetNewton()
+        public virtual Vector3D GetNewton(Simulation.SimulationUpdateStepInfo info, PhysicsObject obj)
         {
             return new Vector3D(Fx, Fy, Fz);
         }
