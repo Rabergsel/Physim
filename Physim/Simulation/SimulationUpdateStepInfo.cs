@@ -10,6 +10,7 @@ namespace Physim.Simulation
     {
         public float DeltaT { get; set; } = 0.1f;
         public float Time { get; set; } = 0f;
-
+        
+        public Athmosphere athmosphere { get; set; } = new Athmosphere();
     }
 }

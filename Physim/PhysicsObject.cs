@@ -8,6 +8,11 @@
 
         public Vector3D ResultForce { get; set; } = new Vector3D(0, 0, 0);
 
+        public virtual float Volume()
+        {
+            return 0f;
+        }
+
 
         public virtual Vector3D getAirResistanceCoefficient()
         {
@@ -37,6 +42,8 @@
             {
                 ResultForce += force.GetNewton(info, this);
             }
+
+            Console.WriteLine("Resulting Force: " + ResultForce.ToString());
 
             VelocityVector += AccelerationVector * info.DeltaT;
             PositionVector += VelocityVector * info.DeltaT;

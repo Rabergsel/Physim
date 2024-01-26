@@ -12,6 +12,11 @@ namespace Physim
         public float Y = 0;
         public float Z = 0;
 
+        public override string ToString()
+        {
+            return $"({X}|{Y}|{Z})";
+        }
+
         public double Length {
             get
             {

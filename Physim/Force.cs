@@ -13,6 +13,9 @@ namespace Physim
             Orientation = orientation;
             Newton = initalForce;
         }
+
+        public Force() { }
+
         public string Name { get; set; } = "Force";
 
         public virtual Vector3D GetNewton(Simulation.SimulationUpdateStepInfo info, PhysicsObject obj)

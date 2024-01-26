@@ -20,5 +20,10 @@ namespace Physim.Objects
             return new Vector3D(1.15f, 1.15f, 1.15f);
         }
 
+        public override float Volume()
+        {
+            return Size * Size * Size;
+        }
+
     }
 }

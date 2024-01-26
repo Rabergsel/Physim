@@ -10,6 +10,8 @@ namespace Physim.Simulation
     {
         public List<PhysicsObject> PhysicsObjects { get; set; } = new List<PhysicsObject>();
 
+        public Athmosphere athmosphere { get; set; } = new Athmosphere();
+
         public float TimeStepSize = 0.1f;
         public float Time = 0;
         public float MaximalTime = 0;
@@ -24,7 +26,8 @@ namespace Physim.Simulation
                 var UpdateInfo = new SimulationUpdateStepInfo()
                 {
                     Time = Time,
-                    DeltaT = TimeStepSize
+                    DeltaT = TimeStepSize,
+                    athmosphere = athmosphere
                 };
 
                 foreach(var Object in PhysicsObjects)
@@ -36,7 +39,8 @@ namespace Physim.Simulation
                 {
                     Time = Time,
                     TimeStep = TimeStep,
-                    TimeStepSize = TimeStepSize
+                    TimeStepSize = TimeStepSize,
+                    
                 };
 
                 foreach(var obj in PhysicsObjects)
