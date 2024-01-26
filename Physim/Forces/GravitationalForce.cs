@@ -11,10 +11,11 @@ namespace Physim.Forces
     {
         public float Gravitation { get; set; } = 9.81f;
 
+
         public override Vector3D GetNewton(SimulationUpdateStepInfo info, PhysicsObject obj)
         {
-            Orientation = OrientationsClass.Y_Negative;
-            return new Vector3D(0, obj.Mass * Gravitation, 0);
+            
+            return new Vector3D(0, - obj.Mass * Gravitation, 0);
         }
 
     }

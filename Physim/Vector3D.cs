@@ -8,9 +8,9 @@ namespace Physim
 {
     public class Vector3D
     {
-        public float X = 0;
-        public float Y = 0;
-        public float Z = 0;
+        public float X { get; set; } = 0;
+        public float Y { get; set; } = 0;
+        public float Z { get; set; } = 0;
 
         public override string ToString()
         {

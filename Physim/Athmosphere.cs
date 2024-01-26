@@ -8,7 +8,7 @@ namespace Physim
 {
     public class Athmosphere
     {
-        public float BaseDensity = 1.015f;
+        public float BaseDensity { get; set; } = 1.015f;
 
         public virtual float GetPressure(Vector3D Position)
         {

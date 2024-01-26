@@ -2,6 +2,8 @@
 {
     public class PhysicsObject
     {
+        public string Name { get; set; }
+
         public float Mass { get; set; } = 0;
         
         public List<Force> Forces { get; set; } = new List<Force>();

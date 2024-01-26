@@ -8,8 +8,18 @@ namespace Physim.Objects
 {
     public class Cube : PhysicsObject
     {
+        public Cube()
+        {
+            Name = "Cube";
+        }
 
-        public float Size = 0;
+        public Cube(float Size)
+        {
+            Name = $"Cube_{Size}x{Size}x{Size}";
+            this.Size = Size;
+        }
+
+        public float Size { get; set; } = 0;
         public override Vector3D getProjectedArea()
         {
             return new Vector3D(Size * Size, Size * Size, Size * Size);

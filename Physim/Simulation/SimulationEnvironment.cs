@@ -42,6 +42,7 @@ namespace Physim.Simulation
                     TimeStepSize = TimeStepSize,
                     
                 };
+                StepInfo.athmosphere = athmosphere;
 
                 foreach(var obj in PhysicsObjects)
                 {
