@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Physim.Objects
 {
-    public class Cube : PhysicsObject
+    internal class Cylinder : PhysicsObject
     {
+        public float Radius { get; set; } = 1f;
+        public float Height { get; set; } = 1f;
 
-        public float Size = 0;
         public override Vector3D getProjectedArea()
         {
-            return new Vector3D(Size * Size, Size * Size, Size * Size);
+            return new Vector3D(Height * 2 * Radius, Height * 2 * Radius, Radius * Radius * 3.1415f);
         }
 
         public override Vector3D getAirResistanceCoefficient()
         {
-            return new Vector3D(1.15f, 1.15f, 1.15f);
+            return new Vector3D(1.2f, 1.2f, 1.1f);
         }
 
     }

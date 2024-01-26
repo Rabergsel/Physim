@@ -8,6 +8,11 @@
 
         public Vector3D ResultForce { get; set; } = new Vector3D(0, 0, 0);
 
+
+        public virtual Vector3D getAirResistanceCoefficient()
+        {
+            return new Vector3D(0, 0, 0);
+        }
         public virtual Vector3D getProjectedArea()
         {
             return new Vector3D(0, 0, 0);
