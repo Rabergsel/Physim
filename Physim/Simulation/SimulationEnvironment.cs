@@ -32,13 +32,20 @@ namespace Physim.Simulation
                     Object.Update(UpdateInfo);
                 }
 
-                infos.Add(new SimulationStepInfo()
+                var StepInfo = new SimulationStepInfo()
                 {
-                    Objects = PhysicsObjects,
                     Time = Time,
                     TimeStep = TimeStep,
                     TimeStepSize = TimeStepSize
-                });
+                };
+
+                foreach(var obj in PhysicsObjects)
+                {
+                    StepInfo.Objects.Add(obj.GetClone());
+                }
+
+                infos.Add(StepInfo);
+
 
             }
 

@@ -19,6 +19,6 @@ var steps = sim.RunSimulation();
 
 foreach(var step in steps)
 {
-    Console.WriteLine($"t = {step.Time}\t Pos Cube: ({step.Objects[0].PositionVector.X}|{step.Objects[0].PositionVector.Y}|{step.Objects[0].PositionVector.Z})");
+    Console.WriteLine($"t = {step.Time}\t Vel Cube: ({step.Objects[0].VelocityVector.X}|{step.Objects[0].VelocityVector.Y}|{step.Objects[0].VelocityVector.Z})");
 }
 Console.ReadLine();

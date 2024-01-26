@@ -13,6 +13,11 @@
             return new Vector3D(0, 0, 0);
         }
 
+        public PhysicsObject GetClone()
+        {
+            return (PhysicsObject)this.MemberwiseClone();
+        }
+
         //Dynamic Attributes
         public Vector3D PositionVector { get; set; } = new Vector3D(0, 0, 0);
 
