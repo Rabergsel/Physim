@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Physim.Simulation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,51 @@ using System.Threading.Tasks;
 
 namespace Physim.Dynamics
 {
-    internal class DynamicObject : PhysicsObject
+    public class DynamicObject : PhysicsObject
     {
+        public Vector3D cwValues { get; set; } = new Vector3D(0, 0, 0);
+        public Vector3D projectedAreas { get; set; } = new Vector3D(0, 0, 0);
+
+        public List<Event> Events { get; set; } = new List<Event>();
+
+        private void reassignValues(DynamicObject tocopy)
+        {
+            cwValues = tocopy.cwValues;
+            projectedAreas = tocopy.projectedAreas;
+        }
+
+        public override void Update(SimulationUpdateStepInfo info)
+        {
+
+            foreach(var ev in Events)
+            {
+                if(!ev.Fired)
+                {
+                   
+                    bool fire = ev.CheckForFire(info, (DynamicObject)MemberwiseClone());
+                    if (fire) reassignValues(ev.FireEvent(info, (DynamicObject)MemberwiseClone()));
+                }
+                else
+                {
+                    reassignValues(ev.Update(info, (DynamicObject)MemberwiseClone()));
+                }
+            }
+
+            ResultForce = new Vector3D(0, 0, 0);
+            foreach (var force in Forces)
+            {
+                ResultForce += force.GetNewton(info, this);
+            }
+
+            Console.WriteLine("Resulting Force: " + ResultForce.ToString());
+
+            VelocityVector += AccelerationVector * info.DeltaT;
+            PositionVector += VelocityVector * info.DeltaT;
+
+
+        }
+
+        
 
     }
 }

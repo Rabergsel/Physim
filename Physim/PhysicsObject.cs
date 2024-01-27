@@ -33,11 +33,11 @@
         //Dynamic Attributes
         public Vector3D PositionVector { get; set; } = new Vector3D(0, 0, 0);
 
-        public Vector3D VelocityVector { get; private set; } = new Vector3D(0, 0, 0);
+        public Vector3D VelocityVector { get; internal set; } = new Vector3D(0, 0, 0);
 
         public Vector3D AccelerationVector { get { return ResultForce / Mass; } set { } }
 
-        public void Update(Simulation.SimulationUpdateStepInfo info)
+        public virtual void Update(Simulation.SimulationUpdateStepInfo info)
         {
             ResultForce = new Vector3D(0, 0, 0);
             foreach(var force in Forces)
