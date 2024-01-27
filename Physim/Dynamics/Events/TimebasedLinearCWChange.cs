@@ -1,23 +1,27 @@
 ﻿using Physim.Simulation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Physim.Dynamics.Events
 {
-    internal class LinearCWChange : Event
+    public class TimebasedLinearCWChange : Event
     {
-        Vector3D FinalCW = new Vector3D(0, 0, 0);
+        public TimebasedLinearCWChange(Vector3D FinalCW, float Seconds, float FireTime)
+        {
+            this.FinalCW = FinalCW;
+            this.Seconds = Seconds;
+            this.FireTime = FireTime;
+        }
+
+        public Vector3D FinalCW = new Vector3D(0, 0, 0);
         private Vector3D StartCW = new Vector3D(0, 0, 0);
         private Vector3D delta = new Vector3D(0, 0, 0);
 
+
+        public float FireTime = 10f;
         public float Seconds = 1f;
 
         public override bool CheckForFire(SimulationUpdateStepInfo info, DynamicObject obj)
         {
-            return base.CheckForFire(info, obj);
+            return info.Time > FireTime;
         }
 
         public override DynamicObject FireEvent(SimulationUpdateStepInfo info, DynamicObject obj)

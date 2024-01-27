@@ -9,7 +9,7 @@ namespace Physim.Simulation
     public class SimulationEnvironment
     {
         public List<PhysicsObject> PhysicsObjects { get; set; } = new List<PhysicsObject>();
-
+        public List<Dynamics.DynamicObject> DynamicsObjects { get; set; } = new List<Dynamics.DynamicObject>();
         public Athmosphere athmosphere { get; set; } = new Athmosphere();
 
         public float TimeStepSize = 0.1f;
@@ -30,7 +30,12 @@ namespace Physim.Simulation
                     athmosphere = athmosphere
                 };
 
-                foreach(var Object in PhysicsObjects)
+                foreach (var Object in DynamicsObjects)
+                {
+                    Object.Update(UpdateInfo);
+                }
+
+                foreach (var Object in PhysicsObjects)
                 {
                     Object.Update(UpdateInfo);
                 }

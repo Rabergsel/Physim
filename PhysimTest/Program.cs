@@ -3,19 +3,24 @@ using Physim.Simulation;
 using Physim.Objects;
 using Physim.Forces;
 using Physim.Athmospheres.Natural;
+using Physim.Dynamics;
+using Physim.Dynamics.Events;
 
 SimulationEnvironment sim = new SimulationEnvironment();
 sim.athmosphere = new IsothermicAthmosphere();
 
-Cube cube = new Cube();
-cube.Size = 0.01f;
+DynamicObject cube = new DynamicObject();
 cube.Mass = 1;
 cube.PositionVector = new Vector3D(0, 10000, 0);
 cube.Forces.Add(new GravitationalForce());
 cube.Forces.Add(new AirResistanceForce());
+cube.cwValues = new Vector3D(0.15f, 0.15f, 0.15f);
+cube.projectedAreas = new Vector3D(0.2f, 0.2f, 0.2f);
+
+cube.Events.Add(new TimebasedLinearCWChange(new Vector3D(0.25f, 1.4f, 0.25f), 2.5f, 5f));
 
 sim.PhysicsObjects.Add(cube);
-sim.MaximalTime = 100;
+sim.MaximalTime = 10;
 sim.TimeStepSize = 0.01f;
 
 var steps = sim.RunSimulation();

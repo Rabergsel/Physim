@@ -14,6 +14,25 @@ namespace Physim.Dynamics
 
         public List<Event> Events { get; set; } = new List<Event>();
 
+        public DynamicObject()
+        {
+            this.Name = "DynamicObject";
+        }
+        public DynamicObject(string Name)
+        {
+            this.Name = Name;
+        }
+
+        public override Vector3D getAirResistanceCoefficient()
+        {
+            return cwValues;
+        }
+
+        public override Vector3D getProjectedArea()
+        {
+            return projectedAreas;
+        }
+
         private void reassignValues(DynamicObject tocopy)
         {
             cwValues = tocopy.cwValues;
