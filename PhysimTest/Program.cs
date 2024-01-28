@@ -6,7 +6,7 @@ using Physim.Athmospheres.Natural;
 using Physim.Dynamics;
 using Physim.Dynamics.Events;
 
-SimulationEnvironment sim = new SimulationEnvironment();
+var sim = new RealTimeSimulationEnvironment();
 sim.athmosphere = new IsothermicAthmosphere();
 
 DynamicObject cube = new DynamicObject();

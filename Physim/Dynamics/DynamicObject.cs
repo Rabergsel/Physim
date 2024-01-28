@@ -23,6 +23,16 @@ namespace Physim.Dynamics
             this.Name = Name;
         }
 
+
+        public void FireEventByName(string name, SimulationUpdateStepInfo info)
+        {
+            for(int i = 0; i < Events.Count; i++)
+            {
+                if (Events[i].Name == name) reassignValues(Events[i].FireEvent(info, (DynamicObject)MemberwiseClone()));
+                
+            }
+        }
+
         public override Vector3D getAirResistanceCoefficient()
         {
             return cwValues;
