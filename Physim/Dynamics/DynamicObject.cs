@@ -35,10 +35,15 @@ namespace Physim.Dynamics
 
             foreach(var Sensor in Sensors)
             {
-                values.Add(Sensor.Name, Sensor.getValue(this, info));
+                if(Sensor.send(info.Time))
+                {
+                    values.Add(Sensor.Name, Sensor.getValue(this, info));
+                    Client.Send(Sensor.Name, Sensor.getValue(this, info).ToString());
+                }
+
             }
 
-            Client.Send(System.Text.Json.JsonSerializer.Serialize(values));
+            
 
         }
 

@@ -46,24 +46,32 @@ namespace Physim.Exporter.Clients.MQTT
                 .Build();
 
             await mqttClient.ConnectAsync(options, CancellationToken.None);
+            Console.WriteLine("Connected to MQTT");
         }
 
 
         public async void publish(string topic, string payload)
         {
-            var message = new MqttApplicationMessageBuilder()
-                .WithTopic(topic)
-                 .WithPayload(payload)
-                .WithRetainFlag()
-                 .Build();
-
-            await mqttClient.PublishAsync(message, CancellationToken.None); // Since 3.0.5 with CancellationToken
+            try
+            {
+                var message = new MqttApplicationMessageBuilder()
+                    .WithTopic(topic)
+                     .WithPayload(payload)
+                    .WithRetainFlag()
+                     .Build();
+                await mqttClient.PublishAsync(message, CancellationToken.None); // Since 3.0.5 with CancellationToken
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error while trying to send MQTT Message: " + ex);
+            }
         }
 
 
-        public override void Send(string data)
+        public override void Send(string args, string data)
         {
-            publish(options.topic, data);
+            if (options == null) return;
+            publish(options.topic + "/" + args, data.Replace(',', '.'));
         }
 
 

@@ -10,6 +10,8 @@ namespace Physim.Simulation
     {
         public float WaitingTimeMS = 100;
 
+
+
         public override List<SimulationStepInfo> RunSimulation(bool logSteps = true)
         {
             int TimeStep = 0;
@@ -23,7 +25,7 @@ namespace Physim.Simulation
                 var UpdateInfo = new SimulationUpdateStepInfo()
                 {
                     Time = Time,
-                    DeltaT = Time - secs,
+                    DeltaT = WaitingTimeMS/1000,
                     athmosphere = athmosphere
                 };
 
