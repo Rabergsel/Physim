@@ -11,8 +11,12 @@ namespace Physim.Dynamics
     {
         public Vector3D cwValues { get; set; } = new Vector3D(0, 0, 0);
         public Vector3D projectedAreas { get; set; } = new Vector3D(0, 0, 0);
-
         public List<Event> Events { get; set; } = new List<Event>();
+
+        public List<Sensors.Sensor> Sensors { get; set; } = new List<Sensors.Sensor>();
+
+        public Exporter.Clients.Client Client { get; set; } = null;
+
 
         public DynamicObject()
         {
@@ -23,6 +27,20 @@ namespace Physim.Dynamics
             this.Name = Name;
         }
 
+        public void sendData(Simulation.SimulationUpdateStepInfo info)
+        {
+            if (Client == null) return;
+
+            Dictionary<string, float> values = new Dictionary<string, float>();
+
+            foreach(var Sensor in Sensors)
+            {
+                values.Add(Sensor.Name, Sensor.getValue(this, info));
+            }
+
+            Client.Send(System.Text.Json.JsonSerializer.Serialize(values));
+
+        }
 
         public void FireEventByName(string name, SimulationUpdateStepInfo info)
         {
@@ -77,6 +95,7 @@ namespace Physim.Dynamics
             VelocityVector += AccelerationVector * info.DeltaT;
             PositionVector += VelocityVector * info.DeltaT;
 
+            sendData(info);
 
         }
 
