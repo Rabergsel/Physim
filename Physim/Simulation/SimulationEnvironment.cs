@@ -10,13 +10,27 @@ namespace Physim.Simulation
     {
         public List<PhysicsObject> PhysicsObjects { get; set; } = new List<PhysicsObject>();
         public List<Dynamics.DynamicObject> DynamicsObjects { get; set; } = new List<Dynamics.DynamicObject>();
+        public List<Criterias.Criteria> EndCriterias { get; set; } = new List<Criterias.Criteria>();
         public Athmosphere athmosphere { get; set; } = new Athmosphere();
+
 
         public float TimeStepSize = 0.1f;
         public float Time = 0;
         public float MaximalTime = 0;
 
 
+        internal bool isEndCriteriaMet(SimulationUpdateStepInfo info)
+        {
+
+            foreach(var endcriteria in EndCriterias)
+            {
+                if (endcriteria.isFullfilled(PhysicsObjects, info)) return true;
+            }
+
+            return false;
+
+        }
+        
 
         public virtual List<SimulationStepInfo> RunSimulation(bool logSteps = true)
         {
@@ -56,8 +70,9 @@ namespace Physim.Simulation
                     StepInfo.Objects.Add(obj.GetClone());
                 }
 
-                infos.Add(StepInfo);
+               if(logSteps) infos.Add(StepInfo);
 
+                if (isEndCriteriaMet(UpdateInfo)) break;
 
             }
 

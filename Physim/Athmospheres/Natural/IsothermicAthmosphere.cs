@@ -8,8 +8,6 @@ namespace Physim.Athmospheres.Natural
 {
     public class IsothermicAthmosphere : Athmosphere
     {
-        public float BasePressure { get; set; } = 1021.5f;
-
         public float BaseHeight { get; set; } = 0f;
 
         public float HeightScaleFactor { get; set; } = 8400;

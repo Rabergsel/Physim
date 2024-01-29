@@ -55,6 +55,8 @@ namespace Physim.Simulation
 
                secs = stopwatch.ElapsedMilliseconds / 1000;
 
+                if (isEndCriteriaMet(UpdateInfo)) break;
+
                 System.Threading.Thread.Sleep((int)WaitingTimeMS);
 
             }

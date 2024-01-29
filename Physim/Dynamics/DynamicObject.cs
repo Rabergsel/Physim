@@ -72,7 +72,7 @@ namespace Physim.Dynamics
                 ResultForce += force.GetNewton(info, this);
             }
 
-            Console.WriteLine("Resulting Force: " + ResultForce.ToString());
+            Console.WriteLine($" t = {info.Time}\tF={ResultForce.ToString()}\t p = {PositionVector.ToString()}\tv = {VelocityVector.ToString()}\ta = {AccelerationVector.ToString()}");
 
             VelocityVector += AccelerationVector * info.DeltaT;
             PositionVector += VelocityVector * info.DeltaT;
